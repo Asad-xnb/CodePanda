@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codepanda - Your favorite food, delivered fast</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+@include('includes/head', ['title' => 'Home'])
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -84,33 +80,8 @@
             box-shadow: 0 0 0 0.25rem rgba(162, 20, 255, 0.25);
         }
     </style>
-</head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="index.html" style="color: var(--dark-purple);">CodePanda</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Restaurants</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+        @include('includes/header')
     <div class="hero">
         <div class="container h-100">
             <div class="row hero-content align-items-center">
@@ -132,82 +103,9 @@
     <div class="container my-5">
         <h2 class="text-center mb-4">Find us in these cities and many more!</h2>
         <div class="cities__grid">
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
-
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
-
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
-
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
-
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
-
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
-
-            <div class="cities__grid-item">
-                <a href="/city/new-york" data-gtm-cta="findRestaurant_new-york">
-                    <figure>
-                        <picture>
-                            <img src="https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="New York">
-                        </picture>
-                        <figcaption><span>Faisalabad</span></figcaption>
-                    </figure>
-                </a>
-            </div>
+            @foreach ( $cities as $city )
+                @include('includes/city-card', ['name' => $city['name'], 'image' => $city['image']])
+            @endforeach
             
         </div>
     </div>
@@ -293,66 +191,7 @@
         </div>
     </div>
 
-    <div class="container">
-        <section class="py-5">
-          <div class="row">
-            <div class="col-6 col-md-2 mb-3">
-              <h5>Section</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-              </ul>
-            </div>
-      
-            <div class="col-6 col-md-2 mb-3">
-              <h5>Section</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-              </ul>
-            </div>
-      
-            <div class="col-6 col-md-2 mb-3">
-              <h5>Section</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-              </ul>
-            </div>
-      
-            <div class="col-md-5 offset-md-1 mb-3">
-              <form>
-                <h5>Subscribe to our newsletter</h5>
-                <p>Monthly digest of what's new and exciting from us.</p>
-                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                  <label for="newsletter1" class="visually-hidden">Email address</label>
-                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                  <button class="btn btn-purple" type="button">Subscribe</button>
-                </div>
-              </form>
-            </div>
-          </div>
-
-        </section>
-      </div>
-
-    <footer class="text-center py-3" style="background-color: #f0e6ff;">
-        <p>&copy; 2023 Codepanda. All rights reserved.</p>
-        <ul class="list-unstyled d-flex">
-            <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-            <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-            <li class="ms-3"><a class="link-body-emphasis" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-          </ul>
-    </footer>
+    @include('includes/footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
