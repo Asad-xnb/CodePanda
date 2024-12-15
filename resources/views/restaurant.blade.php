@@ -124,7 +124,10 @@
                     <h5 class="card-title">Pizza Margherita</h5>
                     <p class="card-text">Classic pizza with fresh mozzarella, basil, and tomato sauce.</p>
                     <p class="fw-bold">Price: RS 999</p>
-                    <button class="btn btn-purple">Add to Cart</button>
+                    <form action="route(cart.store)">
+                        <input type="hidden" name="id" value="id">
+                        <button class="btn btn-purple">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         </div>
