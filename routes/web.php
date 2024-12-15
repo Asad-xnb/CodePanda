@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     $cities = [
@@ -62,6 +63,13 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/register', function () {
-    return view('signup');
-});
+
+/*
+ * Auth ROUTES
+ * 
+*/
+
+Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('signup.form');
+Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
+
+

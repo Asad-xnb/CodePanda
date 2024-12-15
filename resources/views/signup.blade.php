@@ -111,10 +111,13 @@
         <h2 class="text-center mb-4" style="color: var(--dark-purple)">
           Create an Account
         </h2>
-        <div class="alert alert-info" style="display: none;" role="alert">
-          This is a Bootstrap alert message!
-        </div>
-        <form action="/signup" method="post" class="d-flex flex-column gap-3">
+        @if (session('error'))
+          <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+          </div>
+        @endif
+        <form action="{{ route('signup') }}" method="post" class="d-flex flex-column gap-3">
+          @csrf
           <div class="mb-3">
             <label
               for="name"
