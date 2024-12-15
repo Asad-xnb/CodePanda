@@ -12,12 +12,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/restaurants">Restaurants</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Signup</a>
-                    </li>
+                    @if (!Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login.form') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('signup.form') }}">Signup</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <form action="{{ route('logout') }}" method="post">
+                                @csrf
+                                <button class="nav-link" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    @endif
+
                 </ul>
             </div>
         </div>

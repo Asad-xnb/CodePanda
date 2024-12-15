@@ -111,10 +111,14 @@
         <h2 class="text-center mb-4" style="color: var(--dark-purple)">
           Create an Account
         </h2>
-        @if (session('error'))
-          <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-          </div>
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <form action="{{ route('signup') }}" method="post" class="d-flex flex-column gap-3">
           @csrf

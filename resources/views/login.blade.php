@@ -111,26 +111,31 @@
         <h2 class="text-center mb-4" style="color: var(--dark-purple)">
           Be an authenticated User
         </h2>
-        <div class="alert alert-info" style="display: none;" role="alert">
-          This is a Bootstrap alert message!
-        </div>
-        <form action="/login" method="post" class="d-flex flex-column gap-3">
-          
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('login') }}" method="post" class="d-flex flex-column gap-3">
+          @csrf
           <div class="mb-3">
             <label
-              for="email"
+              for="cred"
               class="form-label"
               style="font-weight: bold; color: var(--dark-purple)"
               >Email/Phone</label
             >
             <input
-              type="email"
+              type="text"
               class="form-control"
-              id="email"
-              name="email"
+              id="cred"
+              name="cred"
               placeholder="Enter your email or Phone"
-              required
-      incl   />
+              required />
           </div>
 
           <div class="form-group">
@@ -186,7 +191,7 @@
         </form>
         <p class="text-center mt-3" style="color: #555">
           Don't have an account?
-          <a href="/register" style="color: var(--dark-purple); font-weight: bold"
+          <a href="{{ route('signup.form') }}" style="color: var(--dark-purple); font-weight: bold"
             >Register here</a
           >
         </p>
