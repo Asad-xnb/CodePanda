@@ -33,7 +33,7 @@ Route::get('/', function () {
         ]
     ];
     return view('index', compact('cities'));
-});
+})->name("/");
 
 // Route::get('/', function () {
 //     $cities = [

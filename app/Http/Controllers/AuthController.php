@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('index');
+        return redirect()->route('/');
     }
 
     public function showLoginForm()
@@ -50,7 +50,7 @@ class AuthController extends Controller
         if (Auth::attempt([$loginType => $request->cred, 'password' => $request->password])) {
             $request->session()->regenerate();  
 
-            return redirect()->route('index');
+            return redirect('/');
         }
 
         return back()->withErrors([

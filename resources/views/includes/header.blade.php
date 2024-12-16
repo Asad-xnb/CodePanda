@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav" style="align-items: center;">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
@@ -21,19 +21,20 @@
                     </li>
                 @else
                 
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-profile">
-                        <i class="bi bi-person-circle" style="font-size: 1.5rem; color: var(--dark-purple);"></i>
-                    </a>
-                </li>
+                
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
                             <button class="nav-link" type="submit">Logout</button>
                         </form>
                     </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link" href="/user-profile">
+                        <i class="bi bi-person-circle" style="font-size: 1.5rem; color: var(--dark-purple);"></i>
+                    </a>
+                </li>
                 @endif
-                <!-- Cart Icon -->
                 <li class="nav-item">
                     <a class="nav-link position-relative" href="/cart">
                         <i class="bi bi-cart" style="font-size: 1.5rem; color: var(--dark-purple);"></i>
