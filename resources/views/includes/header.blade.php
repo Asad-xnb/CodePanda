@@ -20,17 +20,9 @@
                         <a class="nav-link" href="{{ route('signup.form') }}">Signup</a>
                     </li>
                 @else
-                
-                
-                    <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="post">
-                            @csrf
-                            <button class="nav-link" type="submit">Logout</button>
-                        </form>
-                    </li>
 
                     <li class="nav-item">
-                    <a class="nav-link" href="/user-profile">
+                    <a class="nav-link" href="/user">
                         <i class="bi bi-person-circle" style="font-size: 1.5rem; color: var(--dark-purple);"></i>
                     </a>
                 </li>

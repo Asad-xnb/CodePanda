@@ -4,63 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 
+use App\Models\City;
+
 /*
  * BASE ROUTES
  * 
 */
 
 Route::get('/', function () {
-    $cities = [
-        [
-            'id' => 1,
-            'name' => 'Lahore',
-            'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        ],
-        [
-            'id' => 2,
-            'name' => 'Islamabad',
-            'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Fasialabad',
-            'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        ],
-        [
-            'id' => 3,
-            'name' => 'Karachi',
-            'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        ]
-    ];
+    $cities = City::all();
     return view('index', compact('cities'));
 })->name("/");
-
-// Route::get('/', function () {
-//     $cities = [
-//                 [
-//                     'id' => 1,
-//                     'name' => 'Lahore',
-//                     'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-//                 ],
-//                 [
-//                     'id' => 2,
-//                     'name' => 'Islamabad',
-//                     'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-//                 ],
-//                 [
-//                     'id' => 3,
-//                     'name' => 'Fasialabad',
-//                     'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-//                 ],
-//                 [
-//                     'id' => 3,
-//                     'name' => 'Karachi',
-//                     'image' => 'https://images.unsplash.com/photo-1602939590728-4ba9d4ba5d65?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-//                 ]
-//             ];
-
-//     return view('index',  compact('cities'));
-// })->middleware('auth')->name('index');
 
 Route::get('/restaurant', function () {
     $restaurants = [
@@ -122,6 +76,10 @@ Route::get('/login', function () {
     return view('login');
 });
 
+Route::get('/user', function () {
+    $user = auth()->user();
+    return view('user', compact('user'));
+})->middleware('auth')->name('user');
 
 /*
  * Auth ROUTES

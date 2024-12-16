@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('includes.head', ['title' => 'User Profile'])
+@include('includes.head', ['title' => $user['name']])
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -95,34 +95,40 @@
 
     <section class="user-profile py-5" style="background-color: #f8f9fa;">
         <div class="container">
-          <h2 class="mb-4" style="color: var(--dark-purple); ">Your Profile</h2>
-          <form action="/update" style="width: 50%;" method="POST">
+          <h2 class="mb-4" style="color: var(--dark-purple); ">Welcome {{ $user['name'] }}</h2>
+          <form action="/updateprofile" style="width: 50%;" method="POST">
             <div class="mb-3">
-              <label for="fullName" class="form-label">Full Name</label>
-              <input type="text" class="form-control" id="fullName" value="John Doe" />
+              <label for="username" class="form-label">Name</label>
+              <input type="text" class="form-control" name="username" id="userame" value="{{ $user['name'] }}" />
             </div>
       
             <div class="mb-3">
               <label for="email" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="email" value="john.doe@example.com" />
+              <input type="email" class="form-control" id="email" name="email" value="{{ $user['email'] }}" />
             </div>
       
             <div class="mb-3">
               <label for="phone" class="form-label">Phone Number</label>
-              <input type="text" class="form-control" id="phone" value="+1234567890" />
+              <input type="text" class="form-control" id="phone" name="phone"  value="{{ $user['phone'] }}" />
             </div>
       
             <div class="mb-3">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" value="" />
+              <input type="text" class="form-control" id="address" placeholder="Enter Your Address For delivery" value="" />
             </div>
     
       
             <button type="submit" class="btn btn-purple">Update Information</button>
           </form>
-      
-          <div class="mt-4">
-            <a href="register-business.html" class="btn btn-outline-dark mt-3">Register as Business</a>
+          <div class="mt-2 mb-2">
+              <form action="{{ route('logout') }}" method="post">
+                  @csrf
+                  <button class="nav-link" type="submit">Logout</button>
+              </form>
+          </div>
+
+          <div class="mt-3">
+              <a href="register-business.html" class="btn btn-outline-dark mt-3">Register as Business</a>     
           </div>
         </div>
       </section>
