@@ -7,4 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     //
+    public function city() {
+        return $this->belongsTo(City::class, 'city_id');
+    }
 }

@@ -122,6 +122,7 @@
           'discount' => $restaurant['discount'],
           'restaurant' => $restaurant['name'],
           'image' => $restaurant['image'],
+          'city' => $restaurant['city']['name'],
           'id' => $restaurant['id']
         ])
       @endforeach

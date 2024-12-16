@@ -10,7 +10,8 @@
                 <img src="{{$image}}" alt="Restaurant 1" style="width: 100%; height: 100%; object-fit: cover;">
             </figure>
             <figcaption class="p-3 text-center" style="background: var(--dark-purple-50); color: white; font-weight: bold;">
-                {{$restaurant}}
+                {{$restaurant}} <br>
+                ( {{$city}} )
             </figcaption>
         </div>
     </a>

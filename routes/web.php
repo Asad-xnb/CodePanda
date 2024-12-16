@@ -45,7 +45,7 @@ Route::get('/restaurant', function () {
 
 Route::get('/restaurants', function () {
     $restaurants = Restaurant::all();
-
+    $restaurants->load('city');
     return view('restaurants', compact('restaurants'));
 });
 
