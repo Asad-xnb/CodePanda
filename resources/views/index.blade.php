@@ -87,11 +87,12 @@
             <div class="row hero-content align-items-center">
                 <div class="col-md-6">
                     <h1 class="tagline mb-4" style="font-size: 1.7rem;">Delicious food, delivered to your doorstep</h1>
-                    <form action="/findcity" method="post" class="input-group mb-3">
-                        <input type="text" class="form-control" name="city" placeholder="Enter your city or postal code" aria-label="Postal code">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="cityInput" placeholder="Enter your city or postal code" aria-label="Postal code">
                         <button class="btn btn-outline-secondary" id="locate" type="button">Locate Me</button>
-                        <button class="btn btn-purple" type="submit">Find Food</button>
-                    </form>
+                        <button class="btn btn-purple" id="findFood" type="button">Find Food</button>
+                    </div>
+
                 </div>
                 <div class="col-md-6">
                     <img style="height: 70vh; width: 100%; object-fit: cover;" src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=1910&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Delicious Food" class="img-fluid rounded">
@@ -99,6 +100,9 @@
             </div>
         </div>
     </div>
+
+        
+
 
     <div class="container my-5">
         <h2 class="text-center mb-4">Find us in these cities and many more!</h2>
@@ -194,6 +198,7 @@
     @include('includes/footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/locateCity.js"></script>
 </body>
 </html>
 
