@@ -49,6 +49,13 @@ Route::get('/restaurants', function () {
     return view('restaurants', compact('restaurants'));
 });
 
+Route::get('/city/{name}', function ($name) {
+    $city = City::where('name', $name)->first();
+    $restaurants = $city->restaurants;
+    // dd($restaurants);
+    return view('city', compact('restaurants', 'city'));
+});
+
 Route::get('/registerBusiness', function () {
     return view('register-business');
 }); 

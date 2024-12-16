@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('includes.head', ['title' => 'Restaurants'])
+@include('includes.head', ['title' => $city['name']])
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -103,10 +103,10 @@
         <div class="container h-100">
             <div class="row hero-content align-items-center">
                 <div class="col-md-6">
-                    <h1 class="tagline mb-4" style="font-size: 1.7rem;">Food and groceries delivery from All over Pakistan's best restaurants and shops</h1>
+                    <h1 class="tagline mb-4" style="font-size: 1.7rem;">Food and groceries delivery from {{$city['name']}}'s best restaurants and shops</h1>
                 </div>
                 <div class="col-md-6">
-                    <img style="height: 40vh; width: 100%; object-fit: cover;" src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?q=80&w=1910&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Delicious Food" class="img-fluid rounded">
+                    <img style="height: 40vh; width: 100%; object-fit: cover;" src="{{$city['image']}}" alt="{{$city['name']}} picture" class="img-fluid rounded">
                 </div>
             </div>
         </div>
@@ -117,20 +117,19 @@
     <div class="container">
       <h2 class="text-left mb-4" style="color: var(--dark-purple); font-weight: 300;">Explore Restaurants</h2>
       <div class="row">
-        @if($restaurants->isEmpty())
-            <p class="text-center">No restaurants available at the moment.</p>
-        @else 
-            @foreach($restaurants as $restaurant)
-                @include('includes.restaurant-card', [
-                'discount' => $restaurant['discount'],
-                'restaurant' => $restaurant['name'],
-                'image' => $restaurant['image'],
-                'cityname' => $restaurant['city']['name'],
-                'id' => $restaurant['id']
-                ])
-            @endforeach
-        @endif
-        
+      @if($restaurants->isEmpty())
+                <p class="text-center">No restaurants available in {{$city['name']}} at the moment.</p>
+        @else
+        @foreach($restaurants as $restaurant)
+            @include('includes.restaurant-card', [
+            'discount' => $restaurant['discount'],
+            'restaurant' => $restaurant['name'],
+            'image' => $restaurant['image'],
+            'cityname' => null,
+            'id' => $restaurant['id']
+            ])
+        @endforeach
+      @endif  
       </div>
     </div>
   </section>

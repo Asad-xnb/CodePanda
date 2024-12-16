@@ -11,7 +11,9 @@
             </figure>
             <figcaption class="p-3 text-center" style="background: var(--dark-purple-50); color: white; font-weight: bold;">
                 {{$restaurant}} <br>
-                ( {{$city}} )
+                @if ($cityname) 
+                 ( {{$cityname}} )
+                @endif
             </figcaption>
         </div>
     </a>
