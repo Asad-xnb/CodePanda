@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 
 use App\Models\City;
+use App\Models\Restaurant;
 
 /*
  * BASE ROUTES
@@ -43,27 +44,7 @@ Route::get('/restaurant', function () {
 });
 
 Route::get('/restaurants', function () {
-    $restaurants = [
-        [
-            'id' => 1,
-            'name' => 'Restaurant A',
-            'image' => 'https://images.deliveryhero.io/image/fd-pk/LH/omwm-listing.jpg?width=400&height=225',
-            'discount' => 10
-        ],
-        [
-            'id' => 2,
-            'name' => 'Restaurant B',
-            'image' => 'https://images.deliveryhero.io/image/fd-pk/LH/omwm-listing.jpg?width=400&height=225',
-            'discount' => 15
-        ],
-        [
-            'id' => 3,
-            'name' => 'Restaurant C',
-            'image' => 'https://images.deliveryhero.io/image/fd-pk/LH/omwm-listing.jpg?width=400&height=225',
-            'discount' => 20
-        ]
-    ];
-
+    $restaurants = Restaurant::all();
 
     return view('restaurants', compact('restaurants'));
 });
@@ -80,6 +61,8 @@ Route::get('/user', function () {
     $user = auth()->user();
     return view('user', compact('user'));
 })->middleware('auth')->name('user');
+
+
 
 /*
  * Auth ROUTES
