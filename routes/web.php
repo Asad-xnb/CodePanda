@@ -14,6 +14,9 @@ use App\Models\Restaurant;
 
 Route::get('/', function () {
     $cities = City::all();
+    if (!session()->has('cart')) {
+        session(['cart' => []]);
+    }
     return view('index', compact('cities'));
 })->name("/");
 
@@ -68,6 +71,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
  * 
 */
 
-Route::post('/cart/store', [CartController::class, 'addToCart'])->name('cart.store');
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.clear');
+Route::post('/cart/save', [CartController::class, 'saveCartToDatabase'])->name('cart.save');
+Route::post('/cart/restore', [CartController::class, 'restoreCartFromDatabase'])->name('cart.restore');
+Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');

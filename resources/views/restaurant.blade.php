@@ -132,9 +132,15 @@
                         @else
                             <p class="fw-bold">Price: RS {{ $food['price'] }}</p>
                         @endif
-                        <form action="{{ route('cart.store') }}" method="POST">
+                        <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{ $food['id'] }}">
+                            <input type="hidden" name="name" value="{{ $food['name'] }}">
+                            <input type="hidden" name="price" value="{{ $food['price'] }}">
+                            <input type="hidden" name="image" value="{{ $food['image'] }}">
+                            @if ($food['discount'] > 0)
+                                <input type="hidden" name="discount" value="{{ $food['discount'] }}">
+                            @endif
                             <button class="btn btn-purple">Add to Cart</button>
                         </form>
                     </div>

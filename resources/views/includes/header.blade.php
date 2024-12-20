@@ -32,7 +32,7 @@
                         <i class="bi bi-cart" style="font-size: 1.5rem; color: var(--dark-purple);"></i>
                         
                         <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
-                            3
+                            {{ Cart::getTotalQuantity() }}
                         </span>
                     </a>
                 </li>
