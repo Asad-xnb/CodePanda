@@ -17,30 +17,10 @@ Route::get('/', function () {
     return view('index', compact('cities'));
 })->name("/");
 
-Route::get('/restaurant', function () {
-    $restaurants = [
-        [
-            'id' => 1,
-            'name' => 'Restaurant A',
-            'image' => 'https://images.deliveryhero.io/image/fd-pk/LH/omwm-listing.jpg?width=400&height=225',
-            'discount' => 10
-        ],
-        [
-            'id' => 2,
-            'name' => 'Restaurant B',
-            'image' => 'https://images.deliveryhero.io/image/fd-pk/LH/omwm-listing.jpg?width=400&height=225',
-            'discount' => 15
-        ],
-        [
-            'id' => 3,
-            'name' => 'Restaurant C',
-            'image' => 'https://images.deliveryhero.io/image/fd-pk/LH/omwm-listing.jpg?width=400&height=225',
-            'discount' => 20
-        ]
-    ];
-
-
-    return view('restaurant');
+Route::get('/restaurant/{id}', function ($id) {
+    $foods = Restaurant::find($id)->foods;
+    $restaurant = Restaurant::find($id);
+    return view('restaurant', compact('foods', 'restaurant'));
 });
 
 Route::get('/restaurants', function () {

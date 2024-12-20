@@ -116,47 +116,31 @@
 <section class="container my-5">
     <h2 class="text-left mb-4" style="color: var(--dark-purple); font-weight: 300">Menu</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        <!-- Food Card 1 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Food Item">
-                <div class="card-body">
-                    <h5 class="card-title">Pizza Margherita</h5>
-                    <p class="card-text">Classic pizza with fresh mozzarella, basil, and tomato sauce.</p>
-                    <p class="fw-bold">Price: RS 999</p>
-                    <form action="route(cart.store)">
-                        <input type="hidden" name="id" value="id">
-                        <button class="btn btn-purple">Add to Cart</button>
-                    </form>
+        @foreach ($foods as $food)
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ $food['image'] }}" class="card-img-top img-fluid" alt="{{ $food['name'] }} picture" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $food['name'] }}</h5>
+                        <p class="card-text">{{ $food['description'] }}</p>
+                        @if ($food['discount'] > 0)
+                            <p class="fw-bold">
+                                Price: 
+                                <span class="text-muted text-decoration-line-through">RS {{ $food['price'] }}</span> 
+                                RS {{ $food['price'] - $food['discount'] }}
+                            </p>
+                        @else
+                            <p class="fw-bold">Price: RS {{ $food['price'] }}</p>
+                        @endif
+                        <form action="{{ route('cart.store') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $food['id'] }}">
+                            <button class="btn btn-purple">Add to Cart</button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Food Card 2 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Food Item">
-                <div class="card-body">
-                    <h5 class="card-title">Grilled Chicken</h5>
-                    <p class="card-text">Juicy grilled chicken served with a side of fresh vegetables.</p>
-                    <p class="fw-bold">Price: $15.00</p>
-                    <button class="btn btn-purple">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-        <!-- Food Card 3 -->
-        <div class="col">
-            <div class="card h-100">
-                <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Food Item">
-                <div class="card-body">
-                    <h5 class="card-title">Vegan Salad</h5>
-                    <p class="card-text">A mix of fresh greens, quinoa, and avocado with a tangy dressing.</p>
-                    <p class="fw-bold">Price: $10.00</p>
-                    <button class="btn btn-purple">Add to Cart</button>
-                </div>
-            </div>
-        </div>
-        <!-- Add more food cards as needed -->
-    </div>
+        @endforeach
 </section>
 
   

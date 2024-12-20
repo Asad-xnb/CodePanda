@@ -7,9 +7,7 @@
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                         async (position) => {
-                            // const { latitude, longitude } = position.coords;
-                            const latitude = 31.4504
-                            const longitude = 73.1350
+                            const { latitude, longitude } = position.coords;
 
                             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
                             const data = await response.json();
