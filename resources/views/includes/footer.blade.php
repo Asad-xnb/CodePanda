@@ -2,37 +2,27 @@
         <section class="py-5">
           <div class="row">
             <div class="col-6 col-md-2 mb-3">
-              <h5>Section</h5>
+              <h5>Pages</h5>
               <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-body-secondary">Home</a></li>
+                <li class="nav-item mb-2"><a href="/restaurants" class="nav-link p-0 text-body-secondary">Restaurants</a></li>
+                <li class="nav-item mb-2"><a href="/login" class="nav-link p-0 text-body-secondary">Login</a></li>
+                <li class="nav-item mb-2"><a href="/signup" class="nav-link p-0 text-body-secondary">Signup</a></li>
               </ul>
             </div>
       
             <div class="col-6 col-md-2 mb-3">
-              <h5>Section</h5>
+              <h5>Cities</h5>
               <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+                <li class="nav-item mb-2"><a href="/city/Faisalabad" class="nav-link p-0 text-body-secondary">Faisalabad</a></li>
+                <li class="nav-item mb-2"><a href="/city/Lahore" class="nav-link p-0 text-body-secondary">Lahore</a></li>
+                <li class="nav-item mb-2"><a href="/city/Islamabad" class="nav-link p-0 text-body-secondary">Islamabad</a></li>
+                <li class="nav-item mb-2"><a href="/city/Karachi" class="nav-link p-0 text-body-secondary">Karachi</a></li>
+                <li class="nav-item mb-2"><a href="/city/Gujranwala" class="nav-link p-0 text-body-secondary">Gujranwala</a></li>
               </ul>
             </div>
       
-            <div class="col-6 col-md-2 mb-3">
-              <h5>Section</h5>
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
-                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
-              </ul>
-            </div>
+            <div class="col-6 col-md-2 mb-3"></div> 
       
             <div class="col-md-5 offset-md-1 mb-3">
               <form>

@@ -239,3 +239,18 @@ Route::get('/dashboard/menu/delete/{id}', function (Request $request, $id) {
     
     return redirect()->route('menu')->with('success', 'Food deleted successfully!');
 })->middleware('auth')->name('deleteFood');
+
+/*
+ * Order ROUTES
+ * 
+*/
+
+Route::get('/order', function () {
+    $user = auth()->user();
+    $orders = $user->orders;
+    return view('order', compact('orders'));
+})->middleware('auth')->name('order');
+
+Route::post('/order', function (Request $request) {
+    
+})->middleware('auth')->name('order');
