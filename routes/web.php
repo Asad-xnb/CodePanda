@@ -173,4 +173,64 @@ Route::get('/dashboard/menu', function () {
         return view('dashboard-menu', compact('foods'));
     }
     return redirect()->route('home')->with('error', 'You are not a restaurant owner');
-})->middleware('auth')->name('editFoodForm');
+})->middleware('auth')->name('menu');
+
+Route::get('/dashboard/menu/update/{id}', function ($id) {
+    $user = auth()->user();
+    if ($user->is_restaurant) {
+        $restaurant = $user->restaurant;
+        $food = $restaurant->foods->find($id);
+        if (!$food) {
+            return redirect()->route('menu')->with('error', 'Food not found');
+        }
+        return view('dashboard-update', compact('food'));
+    }
+    return redirect()->route('home')->with('error', 'You are not a restaurant owner');
+})->middleware('auth')->name('editFood');
+
+Route::post('/dashboard/menu/update/', function (Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'image' => 'image|mimes:jpeg,png,jpg|max:9048',
+    ]);
+    
+    $id = $request->id;
+    $user = auth()->user();
+    $restaurant = $user->restaurant;
+    $food = $restaurant->foods->find($id);
+    if (!$food) {
+        return redirect()->route('menu')->with('error', 'Food not found');
+    }
+    
+    $food->name = $request->name;
+    $food->description = $request->description;
+    $food->price = $request->price;
+    $food->discount = $request->discount ?? 0;
+    
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->extension();
+        $food->image = $imageName;
+        $image->move(public_path('images'), $imageName);
+    }
+    
+    $food->save();
+    
+    return redirect()->route('menu')->with('success', 'Food updated successfully!');
+})->middleware('auth')->name('updateFood');
+
+Route::post('/dashboard/menu/delete/{id}', function (Request $request, $id) {
+    
+    $user = auth()->user();
+    $restaurant = $user->restaurant;
+    $food = $restaurant->foods->find($id);
+    if (!$food) {
+        return redirect()->route('menu')->with('error', 'Food not found');
+    }
+    
+    $food->delete();
+    
+    return redirect()->route('menu')->with('success', 'Food deleted successfully!');
+})->middleware('auth')->name('deleteFood');

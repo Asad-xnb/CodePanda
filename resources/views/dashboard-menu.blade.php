@@ -90,12 +90,24 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Menu Items</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <a href="{{ route('dashboard') }}" class="btn btn-sm btn-purple">
+                        <a href="{{ route('addFoodForm') }}" class="btn btn-sm btn-purple">
                             <i class="bi bi-plus-circle"></i>
                             Add New Item
                         </a>
                     </div>
                 </div>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">

@@ -46,7 +46,7 @@
                         <div class="cart-item">
                             <div class="row align-items-center">
                                 <div class="col-3">
-                                    <img src="{{ $cartItem['attributes']['image'] }}" alt="{{ $cartItem['name'] }} image" class="img-fluid rounded">
+                                    <img src="/images/{{ $cartItem['attributes']['image'] }}" alt="{{ $cartItem['name'] }} image" class="img-fluid rounded">
                                 </div>
                                 <div class="col-6">
                                     <h5>{{ $cartItem['name'] }}</h5>
