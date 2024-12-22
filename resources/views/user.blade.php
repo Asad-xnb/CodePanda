@@ -82,21 +82,25 @@
     </style>
 <body>
     @include('includes.header')
-    <div class="hero">
-        <div class="container h-100">
-            <div class="row hero-content align-items-center">
-                <div class="col-md-6">
-                    <h1 class="tagline mb-4" style="font-size: 1.7rem;">Food and groceries delivery from Islamabad’s best restaurants and shops</h1>
-                </div>
-            </div>
-        </div>
-    </div>
     
+    @if (session('status'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('status') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 
     <section class="user-profile py-5" style="background-color: #f8f9fa;">
         <div class="container">
           <h2 class="mb-4" style="color: var(--dark-purple); ">Welcome {{ $user['name'] }}</h2>
-          <form action="/updateprofile" style="width: 50%;" method="POST">
+          <form action="{{ route('updateProfile') }}" style="width: 50%;" method="POST">
+            @csrf
             <div class="mb-3">
               <label for="username" class="form-label">Name</label>
               <input type="text" class="form-control" name="username" id="userame" value="{{ $user['name'] }}" />
@@ -114,7 +118,7 @@
       
             <div class="mb-3">
               <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="Enter Your Address For delivery" value="" />
+              <input type="text" class="form-control" id="address" name="address" placeholder="Enter Your Address For delivery" value="{{ $user['address'] }}" />
             </div>
     
       

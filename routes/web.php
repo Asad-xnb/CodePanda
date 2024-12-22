@@ -91,6 +91,24 @@ Route::get('/user', function () {
     return view('user', compact('user'));
 })->middleware('auth')->name('user');
 
+Route::post('/updateprofile', function (Request $request) {
+    $validated = $request->validate([
+        'username' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'address' => 'required|string|max:255',
+        'phone' => 'required|string|max:255',
+    ]);
+
+    $user = auth()->user();
+    $user->name = $request->username;
+    $user->address = $request->address;
+    $user->phone = $request->phone;
+    $user->save();
+    
+    
+    return redirect()->route('user')->with('success', 'Profile updated successfully!');
+})->middleware('auth')->name('updateProfile');
+
 Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('signup.form');
 Route::post('/signup', [AuthController::class, 'signup'])->name('signup');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
@@ -252,5 +270,18 @@ Route::get('/order', function () {
 })->middleware('auth')->name('order');
 
 Route::post('/order', function (Request $request) {
-    
-})->middleware('auth')->name('order');
+    $user = auth()->user();
+    if ($user->address == null) {
+        return redirect()->route('user')->with('error', 'Please update your address before placing an order');
+    }
+    $cart = session('cart');
+    $order = $user->orders()->create([
+        'total' => $request->total,
+        'status' => 'pending',
+    ]);
+    foreach ($cart as $item) {
+        $order->foods()->attach($item['id'], ['quantity' => $item['quantity']]);
+    }
+    session(['cart' => []]);
+    return redirect()->route('order')->with('success', 'Order placed successfully!');
+})->middleware('auth')->name('order.place');

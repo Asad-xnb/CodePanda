@@ -109,7 +109,8 @@
                             <span>Total:</span>
                             <span>RS {{ $cartTotal + $deliveryFee + $GST}}</span>
                         </div>
-                        <form method="POST" action="">
+                        <form method="POST" action="{{ route('order.place') }}">
+                            @csrf
                             <div class="mb-3">
                                 <input type="radio" checked id="cashByCard" >
                                 <label for="cashByCard" name="CBC">Pay by Card</label>
