@@ -126,10 +126,12 @@
                   <button class="nav-link" type="submit">Logout</button>
               </form>
           </div>
-
-          <div class="mt-3">
-              <a href="{{ route('registerBusiness') }}" class="btn btn-outline-dark mt-3">Register as Business</a>     
-          </div>
+        
+          @if (!$user['is_restaurant'] == "1")
+                <div class="mt-3">
+                    <a href="{{ route('registerBusiness') }}" class="btn btn-outline-dark mt-3">Register as Business</a>     
+                </div>
+            @endif
         </div>
       </section>
       

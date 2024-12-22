@@ -106,6 +106,12 @@
 
     <div class="container my-5">
         <h2 class="text-center mb-4">Find us in these cities and many more!</h2>
+        @if (session('error'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="cities__grid">
             @foreach ( $cities as $city )
                 @include('includes/city-card', ['name' => $city['name'], 'image' => $city['image']])

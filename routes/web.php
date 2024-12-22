@@ -37,6 +37,9 @@ Route::get('/restaurants', function () {
 Route::get('/city/{name}', function ($name) {
     $city = City::where('name', $name)->first();
     $restaurants = $city->restaurants;
+    if ($restaurants->isEmpty()) {
+        return redirect()->route('home')->with('error', 'No restaurants found in '.$city->name);
+    }
     // dd($restaurants);
     return view('city', compact('restaurants', 'city'));
 });
@@ -68,6 +71,9 @@ Route::post('/registerBusiness', function (Request $request) {
         'phone' => $request->phone,
         'city_id' => $request->city,
     ]);
+    $user->is_restaurant = true;
+    $user->save();
+    
     $image->move(public_path('images'), $imageName);
     
     
