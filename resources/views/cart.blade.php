@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="col-6">
                                     <h5>{{ $cartItem['name'] }}</h5>
-                                    <p class="text-muted">From: Burger Haven</p>
+                                    <p class="text-muted">From: {{ $cartItem['attributes']['restaurant_name'] }}</p>
                                 </div>
                                 <div class="col-3 text-end">
                                 @if ($cartItem['attributes']['discount'] > 0)
@@ -111,22 +111,33 @@
                         </div>
                         <form>
                             <div class="mb-3">
-                                <label for="cardNumber" class="form-label">Card Number</label>
-                                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                                <input type="radio" checked id="cashByCard" >
+                                <label for="cashByCard" name="CBC">Pay by Card</label>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="expiryDate" class="form-label">Expiry Date</label>
-                                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+                            <div id="cardForm">
+                                <div class="mb-3">
+                                    <label for="cardNumber" class="form-label">Card Number</label>
+                                    <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" >
                                 </div>
-                                <div class="col">
-                                    <label for="cvv" class="form-label">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" placeholder="123" required>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" >
+                                    </div>
+                                    <div class="col">
+                                        <label for="cvv" class="form-label">CVV</label>
+                                        <input type="text" class="form-control" id="cvv" placeholder="123" >
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cardName" class="form-label">Name on Card</label>
+                                    <input type="text" class="form-control" id="cardName" placeholder="Asad Zubair" >
                                 </div>
                             </div>
+                            
                             <div class="mb-3">
-                                <label for="cardName" class="form-label">Name on Card</label>
-                                <input type="text" class="form-control" id="cardName" placeholder="Asad Zubair" required>
+                                <input type="radio"  id="cashOnDelivery" >
+                                <label for="cashOnDelivery" name="COD">Cash On Delivery</label>
                             </div>
                             <button type="submit" class="btn btn-purple w-100">Place Order</button>
                         </form>
@@ -136,6 +147,29 @@
         </div>
     </div>
 
+    <script>
+        document.getElementById('cashOnDelivery').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('cashByCard').checked = false;
+                document.getElementById('cardNumber').disabled = true;
+                document.getElementById('expiryDate').disabled = true;
+                document.getElementById('cvv').disabled = true;
+                document.getElementById('cardName').disabled = true;
+                document.getElementById('cardForm').style.display = 'none';
+            } 
+        });
+
+        document.getElementById('cashByCard').addEventListener('change', function() {
+            if (this.checked) {
+                document.getElementById('cashOnDelivery').checked = false;
+                document.getElementById('cardNumber').disabled = false;
+                document.getElementById('expiryDate').disabled = false;
+                document.getElementById('cvv').disabled = false;
+                document.getElementById('cardName').disabled = false;
+                document.getElementById('cardForm').style.display = 'block';
+            }
+        });
+    </script>
     @include('includes/footer')
         
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

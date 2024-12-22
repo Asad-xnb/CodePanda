@@ -140,6 +140,8 @@
                             <input type="hidden" name="name" value="{{ $food['name'] }}">
                             <input type="hidden" name="price" value="{{ $food['price'] }}">
                             <input type="hidden" name="image" value="{{ $food['image'] }}">
+                            <input type="hidden" name="restaurant_name" value="{{ $restaurant['name'] }}">
+                            <input type="hidden" name="restaurant_id" value="{{ $restaurant['id'] }}">
                             @if ($food['discount'] > 0)
                                 <input type="hidden" name="discount" value="{{ $food['discount'] }}">
                             @endif

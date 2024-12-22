@@ -15,6 +15,8 @@ class CartController extends Controller
             'price' => $request->price,
             'quantity' => 1, 
             'attributes' => [
+                'restaurant_id' => $request->restaurant_id,
+                'restaurant_name' => $request->restaurant_name,
                 'description' => $request->description ?? null,
                 'discount' => (int) ($request->discount ?? 0),
                 'image' => $request->image ?? null,
