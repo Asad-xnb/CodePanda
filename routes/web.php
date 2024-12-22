@@ -152,6 +152,7 @@ Route::post('/dashboard/add-food', function (Request $request) {
     
     $user = auth()->user();
     $restaurant = $user->restaurant;
+    $discount = $restaurant->discount;
     $restaurant->foods()->create([
         'name' => $request->name,
         'description' => $request->description,
@@ -159,6 +160,10 @@ Route::post('/dashboard/add-food', function (Request $request) {
         'discount' => $request->discount ?? 0,
         'image' => $imageName,
     ]);
+    if ($discount < $request->discount) {
+        $restaurant->discount = $request->discount;
+        $restaurant->save();
+    }
     
     $image->move(public_path('images'), $imageName);
     
@@ -221,7 +226,7 @@ Route::post('/dashboard/menu/update/', function (Request $request) {
     return redirect()->route('menu')->with('success', 'Food updated successfully!');
 })->middleware('auth')->name('updateFood');
 
-Route::post('/dashboard/menu/delete/{id}', function (Request $request, $id) {
+Route::get('/dashboard/menu/delete/{id}', function (Request $request, $id) {
     
     $user = auth()->user();
     $restaurant = $user->restaurant;
