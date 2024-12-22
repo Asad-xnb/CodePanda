@@ -73,7 +73,7 @@ Route::post('/registerBusiness', function (Request $request) {
     ]);
     $user->is_restaurant = true;
     $user->save();
-    
+
     $image->move(public_path('images'), $imageName);
     
     
@@ -110,3 +110,53 @@ Route::post('/cart/clear', [CartController::class, 'clearCart'])->name('cart.cle
 Route::post('/cart/save', [CartController::class, 'saveCartToDatabase'])->name('cart.save');
 Route::post('/cart/restore', [CartController::class, 'restoreCartFromDatabase'])->name('cart.restore');
 Route::post('/cart/update-quantity', [CartController::class, 'updateQuantity'])->name('cart.updateQuantity');
+
+
+/*
+ * Dashboard ROUTES
+ * 
+*/
+
+Route::get('/dashboard', function () {
+    $user = auth()->user();
+    if ($user->is_restaurant) {
+        $restaurant = $user->restaurant;
+        $foods = $restaurant->foods;
+        return view('dashboard', compact('restaurant', 'foods'));
+    }
+    return redirect()->route('home')->with('error', 'You are not a restaurant owner');
+})->middleware('auth')->name('dashboard');
+
+Route::get('/dashboard/add-food', function () {
+    $user = auth()->user();
+    if ($user->is_restaurant) {
+        $restaurant = $user->restaurant;
+        $foods = $restaurant->foods;
+        return view('add-food');
+    }
+    return redirect()->route('home')->with('error', 'You are not a restaurant owner');
+    
+})->middleware('auth')->name('addFoodForm');
+
+Route::post('/dashboard/add-food', function (Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|numeric',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+    
+    $image = $request->file('image');
+    $imageName = time() . '.' . $image->extension();
+    
+    $user = auth()->user();
+    $restaurant = $user->restaurant;
+    $restaurant->foods()->create([
+        'name' => $request->name,
+        'price' => $request->price,
+        'image' => $imageName,
+    ]);
+    
+    $image->move(public_path('images'), $imageName);
+    
+    return redirect()->route('dashboard')->with('success', 'Food added successfully!');
+})->middleware('auth')->name('addFood');

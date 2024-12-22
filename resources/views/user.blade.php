@@ -131,6 +131,10 @@
                 <div class="mt-3">
                     <a href="{{ route('registerBusiness') }}" class="btn btn-outline-dark mt-3">Register as Business</a>     
                 </div>
+            @else 
+                <div class="mt-3">
+                    <a href="{{ route('dashboard') }}" class="btn btn-outline-dark mt-3">Dashboard</a>     
+                </div>
             @endif
         </div>
       </section>
