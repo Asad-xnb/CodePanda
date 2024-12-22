@@ -14,7 +14,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {{ $active == 'menu' ? 'active' : "" }}" href="/dashboard/menu">
                                 <i class="bi bi-cart"></i>
                                 Menu Items
                             </a>

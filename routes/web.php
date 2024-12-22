@@ -164,3 +164,13 @@ Route::post('/dashboard/add-food', function (Request $request) {
     
     return redirect()->route('addFoodForm')->with('success', 'Food added successfully!');
 })->middleware('auth')->name('addFood');
+
+Route::get('/dashboard/menu', function () {
+    $user = auth()->user();
+    if ($user->is_restaurant) {
+        $restaurant = $user->restaurant;
+        $foods = $restaurant->foods;
+        return view('dashboard-menu', compact('foods'));
+    }
+    return redirect()->route('home')->with('error', 'You are not a restaurant owner');
+})->middleware('auth')->name('editFoodForm');
