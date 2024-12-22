@@ -15,6 +15,9 @@ class AuthController extends Controller
     }
     public function signup(Request $request)
     {
+        if (Auth::check()) {
+            return redirect('user');
+        }
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -36,6 +39,9 @@ class AuthController extends Controller
 
     public function showLoginForm()
     {
+        if (Auth::check()) {
+            return redirect('user');
+        }
         return view('login');
     }
     public function login(Request $request)

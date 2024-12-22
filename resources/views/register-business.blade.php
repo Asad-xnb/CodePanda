@@ -109,44 +109,73 @@
     <section class="register-business py-5" style="background-color: #f8f9fa;">
         <div class="container">
           <h2 class="mb-4" style="color: var(--dark-purple); font-weight: 300;">Register Your Business</h2>
-          <form action="/registerBusiness" method="POST">
-            <div class="mb-3">
-              <label for="businessName" class="form-label">Business Name</label>
-              <input type="text" class="form-control" id="businessName" placeholder="CodePanda" required />
+          @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-      
-            <div class="mb-3">
-              <label for="businessEmail" class="form-label">Business Email</label>
-              <input type="email" class="form-control" id="businessEmail" placeholder="example@business.com" required />
+          @endif
+
+          @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-      
-            <div class="mb-3">
-              <label for="businessPhone" class="form-label">Phone Number</label>
-              <input type="text" class="form-control" id="businessPhone" placeholder="(041) 123 456678" required />
-            </div>
-      
-            <div class="mb-3">
-              <label for="businessAddress" class="form-label">Business Address</label>
-              <input type="text" class="form-control" id="businessAddress" placeholder="Shop no. / Street no. / Landmark / City" required />
-            </div>
-      
-            <div class="mb-3">
-              <label for="businessWebsite" class="form-label">Business Website (Optional)</label>
-              <input type="url" class="form-control" id="businessWebsite" placeholder="https://www.codepanda.com" />
-            </div>
-      
-            <div class="mb-3">
-              <label for="businessLogo" class="form-label">Business Logo / Profile pic</label>
-              <input type="file" class="form-control" id="businessLogo" />
-            </div>
-      
-            <div class="form-check mb-3">
-              <input type="checkbox" class="form-check-input" id="termsConditions" required />
-              <label class="form-check-label" for="termsConditions">I agree to the <a href="#">Terms & Conditions</a></label>
-            </div>
-      
-            <button type="submit" class="btn btn-purple">Register Business</button>
-          </form>
+          @endif
+
+          <form action="{{ route('registerBusiness') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="businessName" class="form-label">Business Name</label>
+                    <input type="text" class="form-control" id="businessName" name="name" 
+                          value="{{ old('name') }}" placeholder="CodePanda" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="businessPhone" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" name="phone" id="businessPhone" 
+                          value="{{ old('phone') }}" placeholder="(041) 123 456678" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <select class="form-select" id="city" name="city" required>
+                        <option selected disabled>Select City</option>
+                        @foreach ($cities as $city)
+                            <option value="{{ $city->id }}" {{ old('city') == $city->id ? 'selected' : '' }}>
+                                {{ $city->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="businessAddress" class="form-label">Business Address</label>
+                    <input type="text" class="form-control" name="address" id="businessAddress" 
+                          value="{{ old('address') }}" placeholder="Shop no. / Street no. / Landmark" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="businessProfile" class="form-label">Business Profile Pic</label>
+                    <input type="file" class="form-control" id="businessProfile" name="image" />
+                </div>
+
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" name="terms" id="termsConditions" 
+                          {{ old('terms') ? 'checked' : '' }} />
+                    <label class="form-check-label" for="termsConditions">
+                        I agree to the <a href="#">Terms & Conditions</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-purple">Register Business</button>
+            </form>
+
+
         </div>
       </section>
       

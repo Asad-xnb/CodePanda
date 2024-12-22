@@ -7,7 +7,7 @@
                 </div>
             @endif
             <figure class="mb-0" style="width: 100%; height: 200px; overflow: hidden;">
-                <img src="{{$image}}" alt="Restaurant 1" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="/images/{{$image}}" alt="Restaurant 1" style="width: 100%; height: 100%; object-fit: cover;">
             </figure>
             <figcaption class="p-3 text-center" style="background: var(--dark-purple-50); color: white; font-weight: bold;">
                 {{$restaurant}} <br>

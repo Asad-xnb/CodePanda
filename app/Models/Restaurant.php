@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurant extends Model
 {
+    protected $fillable = [
+        'name',
+        'address',
+        'phone',
+        'city_id',
+        'image',
+    ];
     //
     public function city() {
         return $this->belongsTo(City::class, 'city_id');

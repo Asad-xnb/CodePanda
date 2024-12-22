@@ -128,7 +128,7 @@
           </div>
 
           <div class="mt-3">
-              <a href="register-business.html" class="btn btn-outline-dark mt-3">Register as Business</a>     
+              <a href="{{ route('registerBusiness') }}" class="btn btn-outline-dark mt-3">Register as Business</a>     
           </div>
         </div>
       </section>
