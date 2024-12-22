@@ -56,7 +56,7 @@ class AuthController extends Controller
         if (Auth::attempt([$loginType => $request->cred, 'password' => $request->password])) {
             $request->session()->regenerate();  
 
-            return redirect('home');
+            return redirect('/');
         }
 
         return back()->withErrors([

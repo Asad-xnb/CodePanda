@@ -84,7 +84,24 @@
                     <h1 class="h2">Add Food Item</h1>
                 </div>
 
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form class="needs-validation" action="{{ route('addFood') }}" method="post" enctype="multipart/form-data" novalidate>
+                    @csrf
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="itemName" class="form-label">Item Name</label>
@@ -112,7 +129,7 @@
 
                         <div class="col-12">
                             <label for="discount" class="form-label">Discount (If-Any)</label>
-                            <input type="text" class="form-control" id="discount" name="discount" placeholder="e.g. In Rupees (20)" required>
+                            <input type="text" class="form-control" id="discount" name="discount" placeholder="e.g. In Rupees (20)">
                             <div class="invalid-feedback">
                                 Please Enter valid Discount.
                             </div>
@@ -120,7 +137,7 @@
 
                         <div class="col-12">
                             <label for="itemImage" class="form-label">Item Image</label>
-                            <input type="file" class="form-control" id="itemImage" accept="image/*" required>
+                            <input type="file" class="form-control" id="itemImage" name="image" accept="image/*" required>
                             <div class="invalid-feedback">
                                 Please upload an image for the food item.
                             </div>
@@ -130,7 +147,7 @@
 
                     <hr class="my-4">
 
-                    <button class="w-100 btn btn-purple btn-lg" type="submit">Add Food Item</button>
+                  <button class="w-100 btn btn-purple btn-lg" type="submit">Add Food Item</button>
                 </form>
             </main>
         </div>

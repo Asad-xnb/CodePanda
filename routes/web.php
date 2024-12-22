@@ -141,8 +141,10 @@ Route::get('/dashboard/add-food', function () {
 Route::post('/dashboard/add-food', function (Request $request) {
     $validated = $request->validate([
         'name' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
         'price' => 'required|numeric',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'required|image|mimes:jpeg,png,jpg|max:9048',
+
     ]);
     
     $image = $request->file('image');
@@ -152,11 +154,13 @@ Route::post('/dashboard/add-food', function (Request $request) {
     $restaurant = $user->restaurant;
     $restaurant->foods()->create([
         'name' => $request->name,
+        'description' => $request->description,
         'price' => $request->price,
+        'discount' => $request->discount ?? 0,
         'image' => $imageName,
     ]);
     
     $image->move(public_path('images'), $imageName);
     
-    return redirect()->route('dashboard')->with('success', 'Food added successfully!');
+    return redirect()->route('addFoodForm')->with('success', 'Food added successfully!');
 })->middleware('auth')->name('addFood');

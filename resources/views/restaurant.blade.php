@@ -119,7 +119,7 @@
         @foreach ($foods as $food)
             <div class="col">
                 <div class="card h-100">
-                    <img src="{{ $food['image'] }}" class="card-img-top img-fluid" alt="{{ $food['name'] }} picture" style="height: 200px; object-fit: cover;">
+                    <img src="/images/{{ $food['image'] }}" class="card-img-top img-fluid" alt="{{ $food['name'] }} picture" style="height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $food['name'] }}</h5>
                         <p class="card-text">{{ $food['description'] }}</p>
