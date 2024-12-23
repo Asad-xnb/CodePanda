@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 
+use Darryldecode\Cart\Facades\CartFacade as Cart;
+
 use App\Models\City;
 use App\Models\Restaurant;
+use App\Models\Order;
+use App\Models\OrderDetail;
+
 
 /*
  * BASE ROUTES
@@ -269,19 +274,8 @@ Route::get('/order', function () {
     return view('order', compact('orders'));
 })->middleware('auth')->name('order');
 
+
 Route::post('/order', function (Request $request) {
-    $user = auth()->user();
-    if ($user->address == null) {
-        return redirect()->route('user')->with('error', 'Please update your address before placing an order');
-    }
-    $cart = session('cart');
-    $order = $user->orders()->create([
-        'total' => $request->total,
-        'status' => 'pending',
-    ]);
-    foreach ($cart as $item) {
-        $order->foods()->attach($item['id'], ['quantity' => $item['quantity']]);
-    }
-    session(['cart' => []]);
-    return redirect()->route('order')->with('success', 'Order placed successfully!');
+     
+   return redirect()->back()->with('success', 'Order placed successfully!');
 })->middleware('auth')->name('order.place');
