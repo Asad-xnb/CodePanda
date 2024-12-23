@@ -189,6 +189,11 @@
 
           <button type="submit" class="btn btn-purple w-100">Log-In</button>
         </form>
+        <hr  style="color: #555"  />
+                <div class="d-flex justify-content-center mt-4">
+                  <a href="" class="btn btn-danger me-2">Login with Google</a>
+                  <a href="" class="btn btn-primary">Login with Facebook</a>
+                </div>
         <p class="text-center mt-3" style="color: #555">
           Don't have an account?
           <a href="{{ route('signup.form') }}" style="color: var(--dark-purple); font-weight: bold"

@@ -239,6 +239,11 @@
 
           <button type="submit" class="btn btn-purple w-100">Sign Up</button>
         </form>
+        <hr  style="color: #555"  />
+                <div class="d-flex justify-content-center mt-4">
+                  <a href="" class="btn btn-danger me-2">Register with Google</a>
+                  <a href="" class="btn btn-primary">Register with Facebook</a>
+                </div>
         <p class="text-center mt-3" style="color: #555">
           Already have an account?
           <a href="/login" style="color: var(--dark-purple); font-weight: bold"
