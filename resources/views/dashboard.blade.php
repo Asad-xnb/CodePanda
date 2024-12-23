@@ -100,7 +100,8 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Total Orders</h5>
-                                <p class="card-text display-6">152</p>
+                                <p class="card-text display-6">{{ $checkouts->count() }}</p>
+                            
                             </div>
                         </div>
                     </div>
@@ -108,23 +109,9 @@
                         <div class="card h-100">
                             <div class="card-body">
                                 <h5 class="card-title">Revenue</h5>
-                                <p class="card-text display-6">$3,240</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">New Customers</h5>
-                                <p class="card-text display-6">24</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">Average Order Value</h5>
-                                <p class="card-text display-6">$21.32</p>
+                                <p class="card-text display-6">
+                                    RS {{ $checkouts->sum(function($checkout) { return $checkout['price'] * $checkout['quantity']; }) }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -136,7 +123,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Customer</th>
+                                <th scope="col">Customer ID</th>
                                 <th scope="col">Items</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Status</th>
@@ -144,52 +131,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1001</td>
-                                <td>John Doe</td>
-                                <td>2x Burger, 1x Fries</td>
-                                <td>$25.98</td>
-                                <td><span class="badge bg-warning text-dark">Preparing</span></td>
-                                <td><button class="btn btn-sm btn-purple">Update</button></td>
-                            </tr>
-                            <tr>
-                                <td>1002</td>
-                                <td>Jane Smith</td>
-                                <td>1x Pizza, 1x Salad</td>
-                                <td>$22.99</td>
-                                <td><span class="badge bg-info text-dark">Out for Delivery</span></td>
-                                <td><button class="btn btn-sm btn-purple">Update</button></td>
-                            </tr>
-                            <tr>
-                                <td>1003</td>
-                                <td>Bob Johnson</td>
-                                <td>3x Tacos, 1x Soda</td>
-                                <td>$18.97</td>
-                                <td><span class="badge bg-success">Delivered</span></td>
-                                <td><button class="btn btn-sm btn-purple">View</button></td>
-                            </tr>
-                            <tr>
-                                <td>1004</td>
-                                <td>Alice Brown</td>
-                                <td>1x Pasta, 1x Garlic Bread</td>
-                                <td>$16.99</td>
-                                <td><span class="badge bg-danger">Cancelled</span></td>
-                                <td><button class="btn btn-sm btn-purple">View</button></td>
-                            </tr>
-                            <tr>
-                                <td>1005</td>
-                                <td>Charlie Wilson</td>
-                                <td>2x Sushi Rolls, 1x Miso Soup</td>
-                                <td>$29.97</td>
-                                <td><span class="badge bg-warning text-dark">Preparing</span></td>
-                                <td><button class="btn btn-sm btn-purple">Update</button></td>
-                            </tr>
+                            @foreach ($checkouts as $order)
+                                <tr>
+                                    <td>{{ $order['id'] }}</td>
+                                    <td>{{ $order['user_id'] }}</td>
+                                    <td>{{ $order['quantity'] }}x {{ $order['name'] }}</td>
+                                    <td>{{ $order['price'] * $order['quantity'] }}</td>
+                                    <td><span class="badge bg-warning text-dark">Preparing</span></td>
+                                    <td><button class="btn btn-sm btn-purple">Update</button></td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </main>
         </div>
     </div>
+
+    <script>
+        document.querySelector('td button').addEventListener('click', function() {
+            const status = prompt('Update Status')
+
+            document.querySelector('td span').classList = 'badge bg-success text-dark'
+            document.querySelector('td span').innerHTML = status;
+        } )
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>

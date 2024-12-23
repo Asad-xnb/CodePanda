@@ -10,7 +10,7 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 use App\Models\City;
 use App\Models\Restaurant;
-use App\Models\Order;
+use App\Models\Checkout;
 use App\Models\OrderDetail;
 
 
@@ -145,7 +145,8 @@ Route::get('/dashboard', function () {
     if ($user->is_restaurant) {
         $restaurant = $user->restaurant;
         $foods = $restaurant->foods;
-        return view('dashboard', compact('restaurant', 'foods'));
+        $checkouts = Checkout::where('restaurant_id', $restaurant['id'])->get();
+        return view('dashboard', compact('restaurant', 'foods', 'checkouts'));
     }
     return redirect()->route('home')->with('error', 'You are not a restaurant owner');
 })->middleware('auth')->name('dashboard');
@@ -276,6 +277,20 @@ Route::get('/order', function () {
 
 
 Route::post('/order', function (Request $request) {
+    $cart = Cart::getContent();
+    $user = auth()->user();
+
+    foreach ($cart as $item) {
+        Checkout::create([
+            'restaurant_id' => $item->attributes->restaurant_id,
+            'user_id' => $user->id,
+            'quantity' => $item->quantity,
+            'price' => $item->price,
+            'name' => $item->name,
+        ]);
+    }
+
+    Cart::clear();
      
    return redirect()->back()->with('success', 'Order placed successfully!');
 })->middleware('auth')->name('order.place');

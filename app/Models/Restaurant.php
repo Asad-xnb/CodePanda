@@ -26,4 +26,9 @@ class Restaurant extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function checkouts()
+    {
+        return $this->hasMany(Checkout::class, 'restaurant_id');
+    }
 }

@@ -11,7 +11,7 @@ class OrderDetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'order_id', 'restaurant_id', 'menu_item_id', 'quantity', 'price',
+         'restaurant_id', 'user_id', 'quantity', 'price',
     ];
 
     // Define the relationship with the order
