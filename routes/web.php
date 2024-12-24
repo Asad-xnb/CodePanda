@@ -11,7 +11,7 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\City;
 use App\Models\Restaurant;
 use App\Models\Checkout;
-use App\Models\OrderDetail;
+use App\Models\Status;
 
 
 /*
@@ -93,7 +93,10 @@ Route::post('/registerBusiness', function (Request $request) {
 
 Route::get('/user', function () {
     $user = auth()->user();
-    return view('user', compact('user'));
+
+    $checkouts = Checkout::where('user_id', $user->id)->get();
+    $checkouts->load('status');
+    return view('user', compact('user', 'checkouts'));
 })->middleware('auth')->name('user');
 
 Route::post('/updateprofile', function (Request $request) {
@@ -146,6 +149,7 @@ Route::get('/dashboard', function () {
         $restaurant = $user->restaurant;
         $foods = $restaurant->foods;
         $checkouts = Checkout::where('restaurant_id', $restaurant['id'])->get();
+        $checkouts->load('status');
         return view('dashboard', compact('restaurant', 'foods', 'checkouts'));
     }
     return redirect()->route('home')->with('error', 'You are not a restaurant owner');
@@ -279,14 +283,26 @@ Route::get('/order', function () {
 Route::post('/order', function (Request $request) {
     $cart = Cart::getContent();
     $user = auth()->user();
+    if ($cart->isEmpty()) {
+        return redirect()->back()->with('error', 'Cart is empty');
+    }
+
+    if ($user->address == null || $user->phone == null) {
+        return redirect()->back()->with('error', 'Please Add address and Phone in your profile to place order');
+    }
 
     foreach ($cart as $item) {
-        Checkout::create([
+        $checkout = Checkout::create([
             'restaurant_id' => $item->attributes->restaurant_id,
             'user_id' => $user->id,
             'quantity' => $item->quantity,
             'price' => $item->price,
             'name' => $item->name,
+        ]);
+
+        Status::create([
+            'checkout_id' => $checkout->id,
+            'status' => 'pending',
         ]);
     }
 
@@ -294,3 +310,16 @@ Route::post('/order', function (Request $request) {
      
    return redirect()->back()->with('success', 'Order placed successfully!');
 })->middleware('auth')->name('order.place');
+
+Route::post('/update/status', function(Request $request) {
+    $validated = $request->validate([
+        'status' => 'required|string|max:255',
+        'id' => 'required|integer',
+    ]);
+
+    $status = Status::where('checkout_id', $request->id)->first();
+    $status->status = $request->status;
+    $status->save();
+
+    return redirect()->back()->with('success', 'Status updated successfully!');
+})->middleware('auth')->name('updateStatus');

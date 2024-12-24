@@ -137,8 +137,19 @@
                                     <td>{{ $order['user_id'] }}</td>
                                     <td>{{ $order['quantity'] }}x {{ $order['name'] }}</td>
                                     <td>{{ $order['price'] * $order['quantity'] }}</td>
-                                    <td><span class="badge bg-warning text-dark">Preparing</span></td>
-                                    <td><button class="btn btn-sm btn-purple">Update</button></td>
+                                    <td><span class="badge bg-{{ $order['status']['status'] == 'sent' ? 'success' : 'warning' }} text-dark">{{ $order['status']['status']}}</span></td>
+                                    <td>
+                                        <form action="/update/status" method="post" class="d-flex align-items-center">
+                                            @csrf  
+                                            <input type="hidden" name="id" value="{{ $order['id'] }}">
+                                            <select name="status" class="form-select form-select-sm me-2">
+                                                <option value="pending" {{ $order['status']['status'] == 'pending' ? 'selected' : '' }}>Pending</option>
+                                                <option value="sent" {{ $order['status']['status'] == 'sent' ? 'selected' : '' }}>Sent</option>
+                                            </select>
+                                            <button class="btn btn-sm btn-purple">Update</button>
+                                        </form>
+                                    </td>
+                                    
                                 </tr>
                             @endforeach
                         </tbody>
@@ -147,15 +158,6 @@
             </main>
         </div>
     </div>
-
-    <script>
-        document.querySelector('td button').addEventListener('click', function() {
-            const status = prompt('Update Status')
-
-            document.querySelector('td span').classList = 'badge bg-success text-dark'
-            document.querySelector('td span').innerHTML = status;
-        } )
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>

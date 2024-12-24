@@ -155,6 +155,8 @@
         </div>
     </div>
 
+        
+
     <script>
         document.getElementById('cashOnDelivery').addEventListener('change', function() {
             if (this.checked) {

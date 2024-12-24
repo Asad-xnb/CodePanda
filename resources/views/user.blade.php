@@ -79,24 +79,24 @@
             border-color: var(--dark-purple);
             box-shadow: 0 0 0 0.25rem rgba(162, 20, 255, 0.25);
         }
-    </style>
-<body>
-    @include('includes.header')
-    
-    @if (session('status'))
+        </style>
+    <body>
+        @include('includes.header')
+        
+        @if (session('status'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('status') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
-    @if (session('error'))
+        @endif
+        @if (session('error'))
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{ session('error') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    @endif
+        @endif
 
-    <section class="user-profile py-5" style="background-color: #f8f9fa;">
+        <section class="user-profile py-5" style="background-color: #f8f9fa;"></section>
         <div class="container">
           <h2 class="mb-4" style="color: var(--dark-purple); ">Welcome {{ $user['name'] }}</h2>
           <form action="{{ route('updateProfile') }}" style="width: 50%;" method="POST">
@@ -143,6 +143,43 @@
         </div>
       </section>
       
+    @if ($checkouts->count() > 0)
+        <section class="checkout py-5">
+            <div class="container">
+                <h2 class="mb-4" style="color: var(--dark-purple); ">Your Checkouts</h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cart-items">
+                            <table class="table table-striped table-hover w-100">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($checkouts as $checkout)
+                                        <tr>
+                                            <td>{{ $checkout['id'] }}</td>
+                                            <td>{{ $checkout['name'] }}</td>
+                                            <td>{{ $checkout['quantity'] }}</td>
+                                            <td>${{ $checkout['price'] }}</td>
+                                            <td>{{ $checkout['status']['status'] == 'sent' ? 'On the Way' : 'Preparing' }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+                                        
 
     @include('includes.footer')
 
